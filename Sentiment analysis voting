@@ -1,0 +1,37 @@
+pragma solidity ^0.8.0;
+
+contract SentimentVoting {
+    enum Sentiment { Neutral, Positive, Negative }
+    
+    struct Vote {
+        address voter;
+        Sentiment sentiment;
+    }
+    
+    Vote[] public votes;
+    
+    function votePositive() public {
+        votes.push(Vote({
+            voter: msg.sender,
+            sentiment: Sentiment.Positive
+        }));
+    }
+    
+    function voteNegative() public {
+        votes.push(Vote({
+            voter: msg.sender,
+            sentiment: Sentiment.Negative
+        }));
+    }
+    
+    function voteNeutral() public {
+        votes.push(Vote({
+            voter: msg.sender,
+            sentiment: Sentiment.Neutral
+        }));
+    }
+    
+    function getTotalVotes() public view returns (uint256) {
+        return votes.length;
+    }
+}
